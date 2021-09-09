@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w  #在exon两位点中间加上intron位点
+#!/usr/bin/perl -w  
 open IN,"$ARGV[0]" or die;
 $out=$ARGV[1];
 if(! open $out_fh, '>', $out){die "Can't write '$out':$!";}
