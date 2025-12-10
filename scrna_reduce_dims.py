@@ -181,8 +181,8 @@ def main():
     parser.add_argument('output', help='Output h5ad file')
     parser.add_argument('--n-pcs', type=int, default=50,
                        help='Number of principal components (default: 50)')
-    parser.add_argument('--use-hvg', action='store_true', default=True,
-                       help='Use only highly variable genes for PCA')
+    parser.add_argument('--no-hvg', dest='use_hvg', action='store_false',
+                       help='Do not use highly variable genes for PCA (default: use HVG)')
     parser.add_argument('--n-neighbors', type=int, default=10,
                        help='Number of neighbors for graph (default: 10)')
     parser.add_argument('--n-pcs-use', type=int, default=40,
