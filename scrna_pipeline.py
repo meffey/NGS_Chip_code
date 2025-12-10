@@ -227,6 +227,20 @@ Example usage:
     
     args = parser.parse_args()
     
+    # Validate input parameters
+    if args.min_genes <= 0:
+        print("Error: --min-genes must be greater than 0")
+        sys.exit(1)
+    if args.max_mt_percent <= 0 or args.max_mt_percent >= 100:
+        print("Error: --max-mt-percent must be between 0 and 100")
+        sys.exit(1)
+    if args.resolution <= 0:
+        print("Error: --resolution must be greater than 0")
+        sys.exit(1)
+    if args.n_top_genes <= 0:
+        print("Error: --n-top-genes must be greater than 0")
+        sys.exit(1)
+    
     # Create output directory
     os.makedirs(args.output_dir, exist_ok=True)
     

@@ -187,11 +187,11 @@ def main():
                        help='Number of neighbors for graph (default: 10)')
     parser.add_argument('--n-pcs-use', type=int, default=40,
                        help='Number of PCs to use for neighbor graph and t-SNE (default: 40)')
-    parser.add_argument('--run-tsne', action='store_true',
+    parser.add_argument('--run-tsne', action='store_true', default=False,
                        help='Run t-SNE (may be slow for large datasets)')
-    parser.add_argument('--run-umap', action='store_true', default=True,
-                       help='Run UMAP (default: True)')
-    parser.add_argument('--run-diffmap', action='store_true',
+    parser.add_argument('--run-umap', action='store_true', default=False,
+                       help='Run UMAP')
+    parser.add_argument('--run-diffmap', action='store_true', default=False,
                        help='Run Diffusion Map')
     parser.add_argument('--umap-min-dist', type=float, default=0.5,
                        help='UMAP min_dist parameter (default: 0.5)')
@@ -223,8 +223,15 @@ def main():
         adata = run_tsne(adata, n_pcs=args.n_pcs_use, plot=True, 
                         output_prefix=args.plot_prefix)
     
-    # Run UMAP
+    # Run UMAP (default if flag is provided)
     if args.run_umap:
+        adata = run_umap(adata, min_dist=args.umap_min_dist, 
+                        spread=args.umap_spread, plot=True, 
+                        output_prefix=args.plot_prefix)
+    
+    # If neither UMAP nor t-SNE was requested, run UMAP by default
+    if not args.run_umap and not args.run_tsne:
+        print("\nNo reduction method specified, running UMAP by default...")
         adata = run_umap(adata, min_dist=args.umap_min_dist, 
                         spread=args.umap_spread, plot=True, 
                         output_prefix=args.plot_prefix)

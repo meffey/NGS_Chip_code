@@ -197,7 +197,7 @@ def main():
                        help='Clustering method (default: leiden)')
     parser.add_argument('--resolution', type=float, default=1.0,
                        help='Clustering resolution (default: 1.0)')
-    parser.add_argument('--find-markers', action='store_true', default=True,
+    parser.add_argument('--find-markers', action='store_true', default=False,
                        help='Find marker genes for clusters')
     parser.add_argument('--marker-method', default='wilcoxon', 
                        choices=['wilcoxon', 't-test', 'logreg'],
@@ -250,6 +250,8 @@ def main():
         if args.export_markers:
             export_marker_genes(adata, args.export_markers, 
                               n_genes=100)
+    else:
+        print("\nSkipping marker gene identification (use --find-markers to enable)")
     
     # Save results
     print(f"\nSaving results to {args.output}...")

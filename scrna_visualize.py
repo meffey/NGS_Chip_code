@@ -121,7 +121,11 @@ def plot_trajectory(adata, root_cluster='0', output_prefix='trajectory'):
         print(f"Warning: Root cluster '{root_cluster}' not found")
         return
     
-    adata.uns['iroot'] = root_cells.idxmax()
+    try:
+        adata.uns['iroot'] = root_cells.idxmax()
+    except ValueError:
+        print(f"Warning: Could not set root cell for cluster '{root_cluster}'")
+        return
     
     # Run diffusion pseudotime
     sc.tl.diffmap(adata)

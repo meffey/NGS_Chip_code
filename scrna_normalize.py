@@ -84,6 +84,12 @@ def identify_hvgs(adata, n_top_genes=2000, method='seurat', plot=True, output_pr
     """
     print(f"\nIdentifying {n_top_genes} highly variable genes using {method} method...")
     
+    # Identify highly variable genes
+    # Parameters explanation:
+    # - min_mean: minimum average expression level (0.0125)
+    # - max_mean: maximum average expression level (3)
+    # - min_disp: minimum dispersion (variability) (0.5)
+    # These thresholds help identify genes with biologically meaningful variation
     if method == 'seurat':
         sc.pp.highly_variable_genes(adata, min_mean=0.0125, max_mean=3, min_disp=0.5)
     elif method == 'cell_ranger':
