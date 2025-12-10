@@ -10,6 +10,8 @@ Usage: python scrna_diff_expr.py <input_h5ad> <output_prefix> [options]
 
 import argparse
 import sys
+import os
+import numpy as np
 import scanpy as sc
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -101,6 +103,9 @@ def plot_de_results(adata, result, top_n=20, output_prefix='de'):
     """
     print(f"\nGenerating DE plots...")
     
+    # Create figures directory if it doesn't exist
+    os.makedirs('figures', exist_ok=True)
+    
     # Get top genes
     top_genes = result.nsmallest(top_n, 'pvals_adj')['names'].tolist()
     
@@ -167,10 +172,6 @@ def main():
     
     # Setup
     setup_scanpy()
-    
-    # Import numpy for plotting
-    import numpy as np
-    globals()['np'] = np
     
     # Load data
     print(f"Loading data from {args.input}...")
