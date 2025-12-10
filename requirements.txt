@@ -1,0 +1,28 @@
+# Requirements for Single-cell RNA-seq Analysis Scripts
+# 单细胞RNA-seq分析所需依赖包
+
+# Core dependencies
+scanpy>=1.9.0
+anndata>=0.8.0
+numpy>=1.21.0
+pandas>=1.3.0
+scipy>=1.7.0
+
+# Plotting and visualization
+matplotlib>=3.4.0
+seaborn>=0.11.0
+
+# Additional analysis tools
+scikit-learn>=1.0.0
+scikit-misc>=0.1.4
+
+# Optional dependencies for enhanced functionality
+# Uncomment if needed:
+# python-igraph>=0.10.0  # For improved Louvain clustering
+# leidenalg>=0.8.0       # For Leiden clustering
+# louvain>=0.7.0         # For Louvain clustering
+# umap-learn>=0.5.0      # For UMAP if not using scanpy's implementation
+# harmonypy>=0.0.5       # For batch correction
+# bbknn>=1.5.0           # For batch-aware KNN graph
+# scrublet>=0.2.3        # For doublet detection
+# velocyto>=0.17         # For RNA velocity analysis
