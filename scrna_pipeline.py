@@ -39,12 +39,8 @@ def run_qc(adata, species='human', min_genes=200, max_mt_percent=20, min_cells=3
     print("="*60)
     
     # Identify mitochondrial genes
-    if species.lower() == 'human':
-        adata.var['mt'] = adata.var_names.str.startswith('MT-')
-    elif species.lower() == 'mouse':
-        adata.var['mt'] = adata.var_names.str.startswith('Mt-')
-    else:
-        adata.var['mt'] = adata.var_names.str.startswith('MT-') | adata.var_names.str.startswith('Mt-')
+    # Note: Uses case-insensitive matching to catch MT-, Mt-, mt- variants
+    adata.var['mt'] = adata.var_names.str.upper().str.startswith('MT-')
     
     # Calculate QC metrics
     sc.pp.calculate_qc_metrics(adata, qc_vars=['mt'], percent_top=None, log1p=False, inplace=True)

@@ -78,14 +78,9 @@ def calculate_qc_metrics(adata, species='human'):
         Updated annotated data with QC metrics
     """
     # Identify mitochondrial genes
-    # Note: This uses case-insensitive matching to catch MT-, Mt-, mt- variants
-    if species.lower() == 'human':
-        adata.var['mt'] = adata.var_names.str.upper().str.startswith('MT-')
-    elif species.lower() == 'mouse':
-        adata.var['mt'] = adata.var_names.str.upper().str.startswith('MT-')
-    else:
-        # For other species, try both common patterns
-        adata.var['mt'] = adata.var_names.str.upper().str.startswith('MT-')
+    # Note: Uses case-insensitive matching to catch MT-, Mt-, mt- variants
+    # This works for both human and mouse (and other species with MT- naming)
+    adata.var['mt'] = adata.var_names.str.upper().str.startswith('MT-')
     
     # Calculate QC metrics
     sc.pp.calculate_qc_metrics(adata, qc_vars=['mt'], percent_top=None, log1p=False, inplace=True)

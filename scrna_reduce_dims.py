@@ -187,11 +187,11 @@ def main():
                        help='Number of neighbors for graph (default: 10)')
     parser.add_argument('--n-pcs-use', type=int, default=40,
                        help='Number of PCs to use for neighbor graph and t-SNE (default: 40)')
-    parser.add_argument('--run-tsne', action='store_true', default=False,
+    parser.add_argument('--run-tsne', action='store_true',
                        help='Run t-SNE (may be slow for large datasets)')
-    parser.add_argument('--run-umap', action='store_true', default=False,
+    parser.add_argument('--run-umap', action='store_true',
                        help='Run UMAP')
-    parser.add_argument('--run-diffmap', action='store_true', default=False,
+    parser.add_argument('--run-diffmap', action='store_true',
                        help='Run Diffusion Map')
     parser.add_argument('--umap-min-dist', type=float, default=0.5,
                        help='UMAP min_dist parameter (default: 0.5)')
